@@ -596,7 +596,7 @@
         try { iframe.src = 'about:blank'; } catch (e) {}
         body.innerHTML =
           '<div style="text-align:center;padding:1.5rem 0.5rem;">' +
-            '<img src="shark-cutout.png" alt="" style="width:140px;max-width:60%;height:auto;display:block;margin:0 auto 0.8rem;">' +
+            '<img src="shark-cutout.png" alt="" style="width:140px;max-width:60%;height:auto;display:block;margin:0 auto 0.8rem;filter:invert(1) brightness(1.1);">' +
             '<div style="font-size:1rem;font-weight:600;margin-bottom:0.4rem;">Thanks for reaching out!</div>' +
             '<div style="font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:1.2rem;">Looking forward to talk to you.</div>' +
             '<button type="button" id="f-new" class="form-submit" style="max-width:240px;margin:0 auto;display:block;">Send new message</button>' +
@@ -613,6 +613,22 @@
       }
 
       form.addEventListener('submit', onSubmit);
+
+      var section = document.querySelector('.form-section');
+      if (section) {
+        section.addEventListener('toggle', function () {
+          if (!section.open) return;
+          requestAnimationFrame(function () {
+            setTimeout(function () {
+              try {
+                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              } catch (e) {
+                section.scrollIntoView();
+              }
+            }, 60);
+          });
+        });
+      }
     })();
   </script>
 
